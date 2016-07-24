@@ -7,6 +7,7 @@ import imp
 import tempfile
 import sys
 from simple_db_migrate.helpers import Utils
+from builtins import str as text
 
 class Migration(object):
 
@@ -77,9 +78,9 @@ class Migration(object):
             return ""
 
         try:
-            sql = unicode(sql.decode(script_encoding))
-        except UnicodeEncodeError:
-            sql = unicode(sql)
+            sql = text(sql.decode(script_encoding))
+        except (UnicodeEncodeError, AttributeError):
+            sql = text(sql)
         return sql
 
     @staticmethod
