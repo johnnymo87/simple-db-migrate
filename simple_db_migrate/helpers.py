@@ -28,7 +28,9 @@ class Utils(object):
             # add settings dir from path
             sys.path.insert(0, path)
 
-            execfile(full_filename, global_dict, global_dict)
+            with open(full_filename) as f:
+                code = compile(f.read(), full_filename, 'exec')
+                exec(code, global_dict, global_dict)
         except IOError:
             raise Exception("%s: file not found" % full_filename)
         except Exception as e:
@@ -42,7 +44,9 @@ class Utils(object):
                 f.write('#-*- coding:%s -*-\n%s' % (file_encoding, content))
                 f.close()
 
-                execfile(temp_abspath, global_dict, global_dict)
+                with open(temp_abspath) as f:
+                    code = compile(f.read(), temp_abspath, 'exec')
+                    exec(code, global_dict, global_dict)
             except Exception as e:
                 raise Exception("error interpreting config file '%s': %s" % (filename, str(e)))
         finally:
