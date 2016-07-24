@@ -1,6 +1,6 @@
-from core import Migration
-from core.exceptions import MigrationException
-from helpers import Utils
+from .core import Migration
+from .core.exceptions import MigrationException
+from .helpers import Utils
 
 class MSSQL(object):
 

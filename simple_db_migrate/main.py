@@ -38,7 +38,7 @@ class Main(object):
                 from oracle import Oracle
                 self.sgdb = Oracle(config)
             elif self.config.get("database_engine") == 'mssql':
-                from mssql import MSSQL
+                from .mssql import MSSQL
                 self.sgdb = MSSQL(config)
             else:
                 raise Exception("engine not supported '%s'" % self.config.get("database_engine"))
