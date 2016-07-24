@@ -8,6 +8,7 @@ import tempfile
 import sys
 from simple_db_migrate.helpers import Utils
 from builtins import str as text
+from functools import cmp_to_key
 
 class Migration(object):
 
@@ -70,7 +71,7 @@ class Migration(object):
 
     @staticmethod
     def sort_migrations_list(migrations, reverse=False):
-        return sorted(migrations, cmp=lambda x,y: x.compare_to(y), reverse=reverse)
+        return sorted(migrations, key=cmp_to_key(lambda x,y: x.compare_to(y)), reverse=reverse)
 
     @staticmethod
     def ensure_sql_unicode(sql, script_encoding):
